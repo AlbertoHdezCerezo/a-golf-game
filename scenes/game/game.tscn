@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq7bdap87t6gp"]
+
+[ext_resource type="PackedScene" uid="uid://ctkri475gklip" path="res://scenes/player/Player.tscn" id="1_g530i"]
+[ext_resource type="Texture2D" uid="uid://d3efap4nib3a2" path="res://assets/textures/level_design/chessboard.png" id="1_pnsd0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6g66"]
+albedo_texture = ExtResource("1_pnsd0")
+uv1_triplanar = true
+
+[node name="Game" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -5, 2.08165e-12)
+use_collision = true
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_o6g66")
+
+[node name="Player" parent="." instance=ExtResource("1_g530i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.022, 2.08165e-12)
+
+[node name="CameraWrapper" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.577017, 0.816732, 0, -0.816732, 0.577017, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraWrapper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.56735)
