@@ -12,11 +12,11 @@ uv1_triplanar = true
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -5, 2.08165e-12)
 use_collision = true
-size = Vector3(3, 10, 3)
+size = Vector3(4, 10, 4)
 material = SubResource("StandardMaterial3D_o6g66")
 
 [node name="Player" parent="." instance=ExtResource("1_g530i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.0756373, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.393539, 2.08165e-12)
 
 [node name="CameraWrapper" type="Node3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
@@ -24,7 +24,7 @@ transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.
 [node name="Camera3D" type="Camera3D" parent="CameraWrapper"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 5)
 projection = 1
-size = 3.0
+size = 4.0
 near = 0.001
 far = 12.0
 

@@ -1,17 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctkri475gklip"]
+[gd_scene load_steps=4 format=3 uid="uid://ctkri475gklip"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jpv8q"]
+bounce = 0.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_w5auy"]
-radius = 0.022
-height = 0.044
+radius = 0.044
+height = 0.088
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_orsmr"]
-radius = 0.022
+radius = 0.044
 
 [node name="Player" type="Node3D"]
 
 [node name="Ball" type="RigidBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_jpv8q")
 
 [node name="Mesh" type="MeshInstance3D" parent="Ball"]
+gi_mode = 2
 mesh = SubResource("SphereMesh_w5auy")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Ball"]
