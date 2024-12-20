@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bq7bdap87t6gp"]
+[gd_scene load_steps=5 format=3 uid="uid://bq7bdap87t6gp"]
 
 [ext_resource type="PackedScene" uid="uid://ctkri475gklip" path="res://scenes/player/Player.tscn" id="1_g530i"]
+[ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_maa8g"]
 [ext_resource type="Texture2D" uid="uid://d3efap4nib3a2" path="res://assets/textures/level_design/chessboard.png" id="1_pnsd0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6g66"]
@@ -8,6 +9,7 @@ albedo_texture = ExtResource("1_pnsd0")
 uv1_triplanar = true
 
 [node name="Game" type="Node3D"]
+script = ExtResource("1_maa8g")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -5, 2.08165e-12)
@@ -21,14 +23,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.393539, 2.0816
 [node name="CameraWrapper" type="Node3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraWrapper"]
+[node name="Camera" type="Camera3D" parent="CameraWrapper"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 5)
 projection = 1
 size = 4.0
 near = 0.001
 far = 12.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="LevelDirectionalLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, 0.5, -0.5, 2.4663e-16, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 1.32343, -3.29226)
 shadow_enabled = true
 directional_shadow_mode = 0
