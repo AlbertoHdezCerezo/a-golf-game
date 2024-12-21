@@ -1,4 +1,4 @@
-extends Node3D
+extends Object
 
 ## Implement the logic to transform mouse coordinates
 ## in the viewport to its equivalent in the 3D space.
@@ -42,7 +42,7 @@ func mouse_viewport_coordinates_in_3d_space() -> Variant:
 	raycast_plane.d = raycast_body_reference.global_position.y
 
 	# Viewport 2D cursor coordinates
-	var mouse_position_2d := get_viewport().get_mouse_position()
+	var mouse_position_2d := raycast_body_reference.get_viewport().get_mouse_position()
 	# 3D camera direction (always the same for orthogonal cameras)
 	var camera_direction := -raycast_camera.global_transform.basis.z.normalized()
 	# 3D point corresponding to orthogonal projection of viewport mouse position

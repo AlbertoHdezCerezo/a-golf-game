@@ -3,11 +3,11 @@ extends Node3D
 # Ball shooting parameters
 var cursor_3d_position_on_aim_start: Vector3
 var force_and_direction_vector_for_shot: Vector3
+var mouse_raycaster := MouseRaycaster.new()
 
 # Dependent nodes
 @onready var ball: RigidBody3D = $Ball
 @onready var camera: Camera3D = $CameraWrapper/Camera
-@onready var mouse_raycaster: MouseRaycaster = $MouseRaycaster
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
