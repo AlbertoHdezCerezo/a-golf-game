@@ -13,15 +13,10 @@ var raycast_camera: Camera3D
 var raycast_plane: Plane
 var raycast_body_reference: Node3D
 
-## Configure mouse raycast to start calculating mouse positions
-func setup(camera: Camera3D, body_reference: Node3D, plane: Plane = Plane(Vector3.UP)) -> void:
+func _init(camera: Camera3D, body_reference: Node3D, plane: Plane = Plane(Vector3.UP)) -> void:
 	raycast_body_reference = body_reference
 	raycast_camera = camera
 	raycast_plane = plane
-
-## Is the raycast ready to transform mouse coordinates?
-func ready_to_raycast() -> bool:
-	return raycast_camera == null || raycast_plane == null
 
 ## Returns the position of the cursor in the 3D space, result
 ## of projecting it from the given rayscast camera to the given
@@ -36,9 +31,6 @@ func ready_to_raycast() -> bool:
 ##     basis direction and the project_ray_origin instead of the
 ##     project_ray_normal method.
 func mouse_viewport_coordinates_in_3d_space() -> Variant:
-	if !ready_to_raycast():
-		push_error("MouseRaycaster not configured. Ensure a camera, ball and plane are assigned to node instance")
-
 	raycast_plane.d = raycast_body_reference.global_position.y
 
 	# Viewport 2D cursor coordinates
