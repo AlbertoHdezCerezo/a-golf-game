@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bq7bdap87t6gp"]
+[gd_scene load_steps=7 format=3 uid="uid://bq7bdap87t6gp"]
 
 [ext_resource type="PackedScene" uid="uid://ctkri475gklip" path="res://scenes/player/Player.tscn" id="1_g530i"]
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_maa8g"]
@@ -8,6 +8,11 @@
 albedo_texture = ExtResource("1_pnsd0")
 uv1_triplanar = true
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_oum2h"]
+rough = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mavsn"]
+
 [node name="Game" type="Node3D"]
 script = ExtResource("1_maa8g")
 
@@ -16,6 +21,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -5, 2.08165e-12)
 use_collision = true
 size = Vector3(4, 10, 4)
 material = SubResource("StandardMaterial3D_o6g66")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGBox3D"]
+transform = Transform3D(4, 0, 0, 0, 4, 0.000767945, 0, -0.000767945, 4, 2.08165e-12, 3, 2.08165e-12)
+physics_material_override = SubResource("PhysicsMaterial_oum2h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_mavsn")
 
 [node name="Player" parent="." instance=ExtResource("1_g530i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.0704734, 2.08165e-12)

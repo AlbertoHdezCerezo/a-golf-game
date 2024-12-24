@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ck31s16p0xdvx" path="res://scenes/player_hud/PlayerHUD.tscn" id="2_7iiyj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jpv8q"]
-friction = 3.0
+rough = true
 bounce = 0.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_w5auy"]
@@ -19,6 +19,7 @@ script = ExtResource("1_2hx15")
 
 [node name="Ball" type="RigidBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_jpv8q")
+angular_damp = 4.0
 
 [node name="Mesh" type="MeshInstance3D" parent="Ball"]
 gi_mode = 2
