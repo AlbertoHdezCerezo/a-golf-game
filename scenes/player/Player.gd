@@ -33,11 +33,6 @@ func _setup_drag_and_drop_controller() -> void:
 	drag_and_drop_controller.drag_signal.connect(self._aim)
 	drag_and_drop_controller.drop_signal.connect(self._shoot)
 
-## Listen to input events and triggers gameplay mechanics on
-## player actions.
-func _input(event: InputEvent) -> void:
-	if _can_shoot(): drag_and_drop_controller.handle_event(event)
-
 ## Can the player shoot the ball? The player should only
 ## be able to shoot when the ball is not moving and there
 ## are no contextual menues interrupting the game flow
@@ -45,6 +40,11 @@ func _can_shoot() -> bool:
 	# TODO: figure out why there is some velocity when
 	# 		ball is stale. Something wrong with physics?
 	return true
+
+## Listen to input events and triggers gameplay mechanics on
+## player actions.
+func _input(event: InputEvent) -> void:
+	if _can_shoot(): drag_and_drop_controller.handle_event(event)
 
 ## Is the player currently doing a drag & drop gesture?
 ## This is the equivalent of aiming.
