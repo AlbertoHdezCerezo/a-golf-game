@@ -6,14 +6,12 @@ extends Node3D
 ## when hitting the ball during the game
 class_name PlayerHUD
 
+const FORCE_AND_DIRECTION_VECTOR_OFFSET := 0.16
+
 @onready var force_and_direction_vector_mesh: ForceAndDirectionVector = $ForceAndDirectionVectorMesh
 
 ## Origin coordinates for rendering HUD
 var origin_coordinates: Vector3
-## Margins around origin for rendering HUD.
-## Defines an area of X meters from the origin
-## which will be left blank by the HUD
-var hud_offset_in_meters: float = 0.16
 
 func _init(new_origin_coordinates: Vector3 = Vector3.ZERO) -> void:
 	origin_coordinates = new_origin_coordinates
@@ -29,7 +27,7 @@ func hide_hud() -> void:
 ## Renders vector representing the force and direction the
 ## player is aiming at, taking HUD configuration into account
 func draw_force_and_direction_vector_for_shot(force_and_direction_vector: Vector3) -> void:
-	force_and_direction_vector_mesh.draw(origin_coordinates, force_and_direction_vector)
+	force_and_direction_vector_mesh.draw(origin_coordinates, force_and_direction_vector, FORCE_AND_DIRECTION_VECTOR_OFFSET)
 
 func hide_force_and_direction_vector_for_shot() -> void:
 	force_and_direction_vector_mesh.erase()

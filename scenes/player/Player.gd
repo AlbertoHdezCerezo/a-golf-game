@@ -58,7 +58,7 @@ func _aiming() -> bool:
 func _aim(normalized_force_and_direction_vector) -> void:
 	if not _can_shoot() || normalized_force_and_direction_vector == null: return
 
-	hud.draw_hud(normalized_force_and_direction_vector * -MAX_MODULE_FOR_SHOT_VECTOR)
+	hud.draw_hud(normalized_force_and_direction_vector * MAX_MODULE_FOR_SHOT_VECTOR)
 
 ## Hits the ball with the direction and force the
 ## user is aiming for. Resets aiming coordinates
