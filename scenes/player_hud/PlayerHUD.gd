@@ -18,10 +18,11 @@ var hud_offset_in_meters: float = 0.16
 func _init(new_origin_coordinates: Vector3 = Vector3.ZERO) -> void:
 	origin_coordinates = new_origin_coordinates
 
-## Draws all HUD elements. To be invoked on each physics frame
+## Draws all HUD elements.
 func draw_hud(force_and_direction_vector: Vector3) -> void:
 	draw_force_and_direction_vector_for_shot(force_and_direction_vector)
 
+## Hides all HUD elements.
 func hide_hud() -> void:
 	hide_force_and_direction_vector_for_shot()
 

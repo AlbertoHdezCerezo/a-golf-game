@@ -1,8 +1,13 @@
 extends Node3D
 
-# Max distance (in meters) for force and direction vector for
-# shot. Limits how long the force & direction indicator can be
+## Multiplication factor applied to normalized force and
+## direction vector to adjust the length of the force and
+## direction vector in the HUD
 const MAX_MODULE_FOR_SHOT_VECTOR := 0.7
+## Multiplication factor applied to normalized force and
+## direction vector to adjust the impulse applied to the
+## ball when shooting
+const MAX_MODULE_FOR_SHOT_IMPULSE := 3.5
 
 # Ball shooting parameters
 var cursor_3d_position_on_aim_start: Vector3
@@ -53,7 +58,7 @@ func _aiming() -> bool:
 func _aim(normalized_force_and_direction_vector) -> void:
 	if not _can_shoot() || normalized_force_and_direction_vector == null: return
 
-	hud.draw_hud(normalized_force_and_direction_vector * -1.5)
+	hud.draw_hud(normalized_force_and_direction_vector * -MAX_MODULE_FOR_SHOT_VECTOR)
 
 ## Hits the ball with the direction and force the
 ## user is aiming for. Resets aiming coordinates
@@ -62,4 +67,4 @@ func _shoot(normalized_force_and_direction_vector) -> void:
 	if not _can_shoot() || normalized_force_and_direction_vector == null: return
 
 	hud.hide_hud()
-	ball.apply_impulse(normalized_force_and_direction_vector * 5)
+	ball.apply_impulse(normalized_force_and_direction_vector * MAX_MODULE_FOR_SHOT_IMPULSE)
