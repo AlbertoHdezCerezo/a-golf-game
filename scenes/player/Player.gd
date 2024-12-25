@@ -12,67 +12,54 @@ var force_and_direction_vector_for_shot: Vector3
 @onready var hud := $Ball/PlayerHUD
 @onready var ball: RigidBody3D = $Ball
 @onready var camera: Camera3D = $CameraWrapper/Camera
-@onready var mouse_raycaster := MouseRaycaster.new(camera, ball, Plane(Vector3.UP))
 
-func _physics_process(_delta: float) -> void:
-	if aiming && _can_shoot():
-		_refresh_force_and_direction_vector_for_shot()
+var drag_and_drop_controller: DragAndDropController
 
-## Input logic
-## -----------
-#  (!) -> To be moved to a script
-var aiming: bool = false
+func _ready() -> void:
+	_setup_drag_and_drop_controller()
 
+## Configures mouse raycaster and drag & drop controller to
+## monitor player gestures and listen to in-game events
+func _setup_drag_and_drop_controller() -> void:
+	var mouse_raycaster := MouseRaycaster.new(camera, ball, Plane(Vector3.UP))
+	drag_and_drop_controller = DragAndDropController.new(mouse_raycaster, 0, 2)
+
+	# drag_and_drop_controller.start_drag_signal.connect()
+	drag_and_drop_controller.drag_signal.connect(self._aim)
+	drag_and_drop_controller.drop_signal.connect(self._shoot)
+
+## Listen to input events and triggers gameplay mechanics on
+## player actions.
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("left_mouse_button_down"):
-		_start_aiming()
-	elif event.is_action_released("left_mouse_button_down"):
-		_shot()
+	if _can_shoot(): drag_and_drop_controller.handle_event(event)
 
+## Can the player shoot the ball? The player should only
+## be able to shoot when the ball is not moving and there
+## are no contextual menues interrupting the game flow
 func _can_shoot() -> bool:
 	# TODO: figure out why there is some velocity when
 	# 		ball is stale. Something wrong with physics?
 	return true
 
-## Resets aiming parameters and sets aim flag
-## to true for tracking mouse coordinates
-func _start_aiming() -> void:
-	if _can_shoot():
-		aiming = true
-		force_and_direction_vector_for_shot = Vector3()
+## Is the player currently doing a drag & drop gesture?
+## This is the equivalent of aiming.
+func _aiming() -> bool:
+	if drag_and_drop_controller == null: return false
+	return drag_and_drop_controller.dragging
 
-		var new_cursor_3d_position_on_aim_start: Variant = mouse_raycaster.mouse_viewport_coordinates_in_3d_space()
-		
-		if new_cursor_3d_position_on_aim_start != null:
-			cursor_3d_position_on_aim_start = new_cursor_3d_position_on_aim_start
+## Triggered when the player performs an aim gesture.
+## Reads direction and force vector from input controller
+## and applies
+func _aim(normalized_force_and_direction_vector) -> void:
+	if not _can_shoot() || normalized_force_and_direction_vector == null: return
 
-## Resets aiming parameter and sets aim flag
-## to false to stop tracking mouse coordinates
-## and cancel ongoing shot (if not triggered already)
-func _stop_aiming() -> void:
-	if aiming:
-		aiming = false
-		cursor_3d_position_on_aim_start = Vector3()
-		force_and_direction_vector_for_shot = Vector3()
+	hud.draw_hud(normalized_force_and_direction_vector * -1.5)
 
 ## Hits the ball with the direction and force the
 ## user is aiming for. Resets aiming coordinates
 ## for future shots.
-func _shot() -> void:
-	if aiming && _can_shoot():
-		hud.hide_hud()
-		ball.apply_impulse(-force_and_direction_vector_for_shot * 5)
-		_stop_aiming()
+func _shoot(normalized_force_and_direction_vector) -> void:
+	if not _can_shoot() || normalized_force_and_direction_vector == null: return
 
-## Updates shot direction and force vector based
-## on initial and current rayscasted cursor positions
-func _refresh_force_and_direction_vector_for_shot() -> void:
-	if not aiming: return
-
-	var current_cursor_3d_position: Variant = mouse_raycaster.mouse_viewport_coordinates_in_3d_space()
-
-	if current_cursor_3d_position == null || cursor_3d_position_on_aim_start == null: return
-
-	force_and_direction_vector_for_shot = (current_cursor_3d_position - cursor_3d_position_on_aim_start).limit_length(MAX_MODULE_FOR_SHOT_VECTOR)
-
-	hud.draw_hud(force_and_direction_vector_for_shot)
+	hud.hide_hud()
+	ball.apply_impulse(normalized_force_and_direction_vector * 5)

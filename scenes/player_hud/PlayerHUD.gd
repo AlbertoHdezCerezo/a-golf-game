@@ -23,9 +23,12 @@ func draw_hud(force_and_direction_vector: Vector3) -> void:
 	draw_force_and_direction_vector_for_shot(force_and_direction_vector)
 
 func hide_hud() -> void:
-	draw_force_and_direction_vector_for_shot(Vector3.ZERO)
+	hide_force_and_direction_vector_for_shot()
 
 ## Renders vector representing the force and direction the
 ## player is aiming at, taking HUD configuration into account
 func draw_force_and_direction_vector_for_shot(force_and_direction_vector: Vector3) -> void:
 	force_and_direction_vector_mesh.draw(origin_coordinates, force_and_direction_vector)
+
+func hide_force_and_direction_vector_for_shot() -> void:
+	force_and_direction_vector_mesh.erase()

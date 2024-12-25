@@ -8,13 +8,17 @@ class_name ForceAndDirectionVector
 ## Renders vector representing the force and direction the
 ## player is aiming at, taking HUD configuration into account
 func draw(origin_coordinates: Vector3, force_and_direction_vector: Vector3, offset: float = 0) -> void:
-	mesh.clear_surfaces()
+	# Re-draw entire mesh on each pass
+	erase()
 	
 	var normalized_force_and_direction_vector = force_and_direction_vector.normalized()
 	var from: Vector3 = origin_coordinates
 	var to: Vector3 = -(from + force_and_direction_vector)
 
 	_draw_line(from, to)
+
+func erase() -> void:
+	mesh.clear_surfaces()
 
 func _draw_line(from: Vector3, to: Vector3, color: Color = Color.WHITE) -> void:
 	# Set mesh to draw lines from coordinates
