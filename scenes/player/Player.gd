@@ -14,13 +14,14 @@ var cursor_3d_position_on_aim_start: Vector3
 var force_and_direction_vector_for_shot: Vector3
 
 # Dependent nodes
-@onready var hud := $Ball/PlayerHUD
+var hud: PlayerHUD
 @onready var ball: RigidBody3D = $Ball
 @onready var camera: Camera3D = $CameraWrapper/Camera
 
 var drag_and_drop_controller: DragAndDropController
 
 func _ready() -> void:
+	_setup_hud()
 	_setup_drag_and_drop_controller()
 
 ## Configures mouse raycaster and drag & drop controller to
@@ -32,6 +33,11 @@ func _setup_drag_and_drop_controller() -> void:
 	# drag_and_drop_controller.start_drag_signal.connect()
 	drag_and_drop_controller.drag_signal.connect(self._aim)
 	drag_and_drop_controller.drop_signal.connect(self._shoot)
+
+func _setup_hud() -> void:
+	hud = preload("res://scenes/player_hud/PlayerHUD.tscn").instantiate()
+	hud.player_node = ball
+	add_child(hud)
 
 ## Can the player shoot the ball? The player should only
 ## be able to shoot when the ball is not moving and there
