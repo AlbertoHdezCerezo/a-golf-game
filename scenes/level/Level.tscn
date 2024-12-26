@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://vtyi4if65eb1"]
+
+[ext_resource type="Material" uid="uid://vwknqoht80pb" path="res://assets/materials/chessboard.tres" id="1_l1ydx"]
+
+[node name="Level" type="Node3D"]
+
+[node name="Map" type="Node" parent="."]
+
+[node name="Ground" type="Node" parent="Map"]
+
+[node name="GroundA" type="CSGBox3D" parent="Map/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+size = Vector3(6, 10, 6)
+material = ExtResource("1_l1ydx")
+
+[node name="Circuit" type="Node" parent="Map"]
+
+[node name="Floor1" type="CSGBox3D" parent="Map/Circuit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00323439, 0.05, 2.08165e-12)
+visible = false
+size = Vector3(6, 0.1, 6)
+
+[node name="Hole" type="CSGCylinder3D" parent="Map/Circuit/Floor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.1, 2.08165e-12)
+operation = 2
+radius = 0.1
+height = 0.5
+sides = 64
