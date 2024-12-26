@@ -16,6 +16,7 @@ var force_and_direction_vector_for_shot: Vector3
 # Dependent nodes
 var hud: PlayerHUD
 @onready var ball: RigidBody3D = $Ball
+@onready var ball_mesh: MeshInstance3D = $Ball/Mesh
 @onready var camera: Camera3D = $CameraWrapper/Camera
 
 var drag_and_drop_controller: DragAndDropController
@@ -27,7 +28,7 @@ func _ready() -> void:
 ## Configures mouse raycaster and drag & drop controller to
 ## monitor player gestures and listen to in-game events
 func _setup_drag_and_drop_controller() -> void:
-	var mouse_raycaster := MouseRaycaster.new(camera, ball, Plane(Vector3.UP))
+	var mouse_raycaster := MouseRaycaster.new(camera, ball, Plane(Vector3.UP, ball_mesh.mesh.radius))
 	drag_and_drop_controller = DragAndDropController.new(mouse_raycaster, 0, 2)
 
 	# drag_and_drop_controller.start_drag_signal.connect()
@@ -36,7 +37,7 @@ func _setup_drag_and_drop_controller() -> void:
 
 func _setup_hud() -> void:
 	hud = preload("res://scenes/player_hud/PlayerHUD.tscn").instantiate()
-	hud.player_node = ball
+	hud.player_node = ball_mesh
 	add_child(hud)
 
 ## Can the player shoot the ball? The player should only
