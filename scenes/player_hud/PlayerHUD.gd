@@ -15,7 +15,7 @@ var player_node: Node3D
 
 ## Player mass center coordinates
 func player_origin_coordinates() -> Vector3:
-	return player_node.global_position - Vector3(0, player_node.mesh.radius, 0)
+	return player_node.global_position
 
 ## Draws all HUD elements.
 func draw_hud(force_and_direction_vector: Vector3) -> void:

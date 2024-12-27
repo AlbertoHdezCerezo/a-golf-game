@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=3 uid="uid://bq7bdap87t6gp"]
+[gd_scene load_steps=6 format=3 uid="uid://bq7bdap87t6gp"]
 
-[ext_resource type="PackedScene" uid="uid://ctkri475gklip" path="res://scenes/player/Player.tscn" id="1_g530i"]
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_maa8g"]
 [ext_resource type="Texture2D" uid="uid://d3efap4nib3a2" path="res://assets/textures/level_design/chessboard.png" id="1_pnsd0"]
 
@@ -29,12 +28,19 @@ physics_material_override = SubResource("PhysicsMaterial_oum2h")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_mavsn")
 
-[node name="Player" parent="." instance=ExtResource("1_g530i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.0704734, 2.08165e-12)
-
 [node name="LevelDirectionalLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, 0.5, -0.5, 2.4663e-16, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 1.32343, -3.29226)
 shadow_enabled = true
 directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 0.5
+
+[node name="CameraWrapper" type="Node3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, -2.08165e-12, -0.393539, -2.08165e-12)
+
+[node name="Camera" type="Camera3D" parent="CameraWrapper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 5)
+projection = 1
+size = 4.0
+near = 0.127
+far = 7.0

@@ -15,9 +15,10 @@ var force_and_direction_vector_for_shot: Vector3
 
 # Dependent nodes
 var hud: PlayerHUD
+var camera: Camera3D
+
 @onready var ball: RigidBody3D = $Ball
 @onready var ball_mesh: MeshInstance3D = $Ball/Mesh
-@onready var camera: Camera3D = $CameraWrapper/Camera
 
 var drag_and_drop_controller: DragAndDropController
 
