@@ -15,6 +15,9 @@ func _setup_game_cursor() -> void:
 
 func _setup_player() -> void:
 	var player = preload("res://scenes/player/Player.tscn").instantiate()
-	player.camera = camera
+
 	player.name = "Player"
+	player.camera = camera
+	player.global_position = Vector3(0, 2, 0)
+
 	add_child(player)
