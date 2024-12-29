@@ -35,6 +35,7 @@ left_mouse_button_down={
 
 [physics]
 
+common/physics_ticks_per_second=80
 3d/solver/solver_iterations=128
 
 [rendering]

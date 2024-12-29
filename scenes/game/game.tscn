@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq7bdap87t6gp"]
+[gd_scene load_steps=4 format=3 uid="uid://bq7bdap87t6gp"]
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_maa8g"]
 [ext_resource type="Texture2D" uid="uid://d3efap4nib3a2" path="res://assets/textures/level_design/chessboard.png" id="1_pnsd0"]
@@ -6,11 +6,6 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6g66"]
 albedo_texture = ExtResource("1_pnsd0")
 uv1_triplanar = true
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_oum2h"]
-rough = true
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_mavsn"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_maa8g")
@@ -20,13 +15,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -5, 2.08165e-12)
 use_collision = true
 size = Vector3(4, 10, 4)
 material = SubResource("StandardMaterial3D_o6g66")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="CSGBox3D"]
-transform = Transform3D(4, 0, 0, 0, 4, 0.000767945, 0, -0.000767945, 4, 2.08165e-12, 3, 2.08165e-12)
-physics_material_override = SubResource("PhysicsMaterial_oum2h")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/StaticBody3D"]
-shape = SubResource("BoxShape3D_mavsn")
 
 [node name="LevelDirectionalLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, 0.5, -0.5, 2.4663e-16, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 1.32343, -3.29226)
