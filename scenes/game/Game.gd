@@ -14,10 +14,13 @@ func _setup_game_cursor() -> void:
 	Input.set_custom_mouse_cursor(cursor_image)
 
 func _setup_player() -> void:
-	var player = preload("res://scenes/player/Player.tscn").instantiate()
+	var player = preload("res://scenes/Player/Player.tscn").instantiate()
 
 	player.name = "Player"
 	player.camera = camera
-	player.global_position = Vector3(0, 2, 0)
+	
+	# TODO: refactor this for a cleaner way to set the ball.
+	#		Avoid changing the node global position or it will break HUD display
+	player.get_node("Ball").position = player.get_node("Ball").position + Vector3(0,2,0)
 
 	add_child(player)

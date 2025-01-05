@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ctkri475gklip"]
 
-[ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_2hx15"]
+[ext_resource type="Script" path="res://scenes/Player/Player.gd" id="1_pt8ob"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jpv8q"]
 rough = true
@@ -14,7 +14,7 @@ height = 0.088
 radius = 0.044
 
 [node name="Player" type="Node3D"]
-script = ExtResource("1_2hx15")
+script = ExtResource("1_pt8ob")
 
 [node name="Ball" type="RigidBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_jpv8q")

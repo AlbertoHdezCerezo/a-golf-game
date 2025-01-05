@@ -37,7 +37,7 @@ func _setup_drag_and_drop_controller() -> void:
 	drag_and_drop_controller.drop_signal.connect(self._shoot)
 
 func _setup_hud() -> void:
-	hud = preload("res://scenes/player_hud/PlayerHUD.tscn").instantiate()
+	hud = preload("res://scenes/PlayerHUD/PlayerHUD.tscn").instantiate()
 	hud.player_node = ball_mesh
 	add_child(hud)
 
