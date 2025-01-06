@@ -1,20 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bq7bdap87t6gp"]
+[gd_scene load_steps=3 format=3 uid="uid://bq7bdap87t6gp"]
 
 [ext_resource type="Script" path="res://scenes/Game/Game.gd" id="1_8qwa6"]
-[ext_resource type="Texture2D" uid="uid://d3efap4nib3a2" path="res://assets/textures/level_design/chessboard.png" id="1_pnsd0"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6g66"]
-albedo_texture = ExtResource("1_pnsd0")
-uv1_triplanar = true
+[ext_resource type="PackedScene" uid="uid://xaa88mf20pod" path="res://scenes/Level/Level.tscn" id="2_34qwt"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_8qwa6")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -5, 2.08165e-12)
-use_collision = true
-size = Vector3(4, 10, 4)
-material = SubResource("StandardMaterial3D_o6g66")
 
 [node name="LevelDirectionalLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, 0.5, -0.5, 2.4663e-16, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 1.32343, -3.29226)
@@ -32,3 +22,5 @@ projection = 1
 size = 4.0
 near = 0.127
 far = 7.0
+
+[node name="Level" parent="." instance=ExtResource("2_34qwt")]

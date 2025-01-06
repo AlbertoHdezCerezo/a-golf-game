@@ -21,6 +21,6 @@ func _setup_player() -> void:
 	
 	# TODO: refactor this for a cleaner way to set the ball.
 	#		Avoid changing the node global position or it will break HUD display
-	player.get_node("Ball").position = player.get_node("Ball").position + Vector3(0,2,0)
+	player.get_node("Ball").position = player.get_node("Ball").position + Vector3(0,1.5,0)
 
 	add_child(player)
