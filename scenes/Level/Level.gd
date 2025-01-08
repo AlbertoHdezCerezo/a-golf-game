@@ -6,6 +6,8 @@ signal object_entered_finish_area_signal(rigid_body_in_finish_area)
 signal object_left_finish_area_signal(rigid_body_which_left_finish_area)
 signal object_stayed_in_finish_area_until_timer_ran_out_signal(rigid_body_in_finish_area)
 
+@export var level_resource : LevelResource
+
 @export var timeout_for_stay := 3
 @onready var finish_timer := $FinishTimer # Used to determine when the ball reaches the finish hole
 @onready var start_point := $StartPoint # Marks the begining of the level, where the ball will be loaded
