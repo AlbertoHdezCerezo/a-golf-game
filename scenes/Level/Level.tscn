@@ -10,6 +10,7 @@ start_point_position = Vector3(0, 0, 0)
 map_mesh_library = ExtResource("1_av58u")
 map_grid_coordinates = Array[Vector3i]([Vector3i(1, 0, 1), Vector3i(0, 0, 1), Vector3i(-1, 0, 1), Vector3i(-2, 0, 1), Vector3i(-2, 0, 0), Vector3i(-2, 0, -1), Vector3i(-2, 0, -2), Vector3i(-1, 0, -2), Vector3i(0, 0, -2), Vector3i(1, 0, -2), Vector3i(1, 0, -1), Vector3i(1, 0, 0), Vector3i(0, 0, 0), Vector3i(-1, 0, 0), Vector3i(-1, 0, -1), Vector3i(0, 0, -1), Vector3i(-3, 0, 1), Vector3i(-3, 0, 0), Vector3i(-3, 0, -1), Vector3i(-3, 0, -2), Vector3i(-2, 0, 2), Vector3i(-1, 0, 2), Vector3i(0, 0, 2), Vector3i(-2, 0, -3), Vector3i(-1, 0, -3), Vector3i(0, 0, -3), Vector3i(2, 0, 1), Vector3i(2, 0, 0), Vector3i(2, 0, -1), Vector3i(2, 0, -2), Vector3i(2, 0, 2), Vector3i(1, 0, 2), Vector3i(-3, 0, 2), Vector3i(-3, 0, -3), Vector3i(1, 0, -3), Vector3i(2, 0, -3)])
 map_grid_mesh_indexes = Array[int]([6, 0, 1, 0, 0, 0, 0, 1, 1, 6, 1, 0, 0, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 2, 1, 2])
+map_grid_mesh_orientations = Array[int]([])
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vkjm8"]
 height = 0.0877467

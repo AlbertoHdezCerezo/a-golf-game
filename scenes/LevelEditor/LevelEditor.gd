@@ -46,10 +46,12 @@ func _update_level_resource_with_editor_information() -> void:
 	level_resource.map_mesh_library = level_map_grid.mesh_library
 	level_resource.start_point_position = level_start_point.position
 	level_resource.map_grid_coordinates = level_map_grid.get_used_cells()
+	level_resource.map_grid_mesh_orientations = []
 	level_resource.map_grid_mesh_indexes = []
 
 	for used_cell_coordinate in level_resource.map_grid_coordinates:
 		level_resource.map_grid_mesh_indexes.append(level_map_grid.get_cell_item(used_cell_coordinate))
+		level_resource.map_grid_mesh_orientations.append(level_map_grid.get_cell_item_orientation(used_cell_coordinate))
 
 # Recreates the level described by a LevelResource instance
 # in the editor, so it can be further worked by the designer.
@@ -66,9 +68,10 @@ func _load_level_from_level_resource(new_level_resource: LevelResource) -> void:
 	if _can_load_grid_map_from_level_resource():
 		# Draw grid map according to level tiles information
 		for index in level_resource.map_grid_coordinates.size():
-			var grid_tile_coordinate = level_resource.map_grid_coordinates[index]
-			var grid_tile_mesh_index = level_resource.map_grid_mesh_indexes[index]
-			level_map_grid.set_cell_item(grid_tile_coordinate, grid_tile_mesh_index)
+			var grid_tile_coordinate := level_resource.map_grid_coordinates[index]
+			var grid_tile_mesh_index := level_resource.map_grid_mesh_indexes[index]
+			var grid_tile_mesh_orientation := level_resource.map_grid_mesh_orientations[index]
+			level_map_grid.set_cell_item(grid_tile_coordinate, grid_tile_mesh_index, grid_tile_mesh_orientation)
 
 func _can_load_grid_map_from_level_resource() -> bool:
 	return level_resource.map_grid_coordinates != null \

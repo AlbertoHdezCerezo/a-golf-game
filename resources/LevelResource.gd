@@ -9,6 +9,8 @@ class_name LevelResource
 @export var map_grid_coordinates: Array[Vector3i]
 # Tile index from mesh library.
 @export var map_grid_mesh_indexes: Array[int]
+# Orientation of each tile in the grid map
+@export var map_grid_mesh_orientations: Array[int]
 
 # TODO: we might need to implement a validation system in future
 func can_save() -> bool:
