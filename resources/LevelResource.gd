@@ -1,3 +1,4 @@
+@tool
 extends Resource
 
 class_name LevelResource
@@ -37,3 +38,10 @@ func dump_changes_to_resource_file() -> void:
 		push_error("Failed to dump work from Level Editor in level resource")
 	else:
 		ResourceSaver.save(self, self.resource_path)
+
+func load_level_in_grid_map(grid: GridMap) -> void:
+	for index in map_grid_coordinates.size():
+		var grid_tile_coordinate := map_grid_coordinates[index]
+		var grid_tile_mesh_index := map_grid_mesh_indexes[index]
+		var grid_tile_mesh_orientation := map_grid_mesh_orientations[index]
+		grid.set_cell_item(grid_tile_coordinate, grid_tile_mesh_index, grid_tile_mesh_orientation)

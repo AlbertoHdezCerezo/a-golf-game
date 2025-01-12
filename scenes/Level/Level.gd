@@ -74,12 +74,7 @@ func _load_level_from_level_resource() -> void:
 	if level_resource.start_point_position != null:
 		level_start_point.position = level_resource.start_point_position
 
-	# Draw grid map according to level tiles information
-	for index in level_resource.map_grid_coordinates.size():
-		var grid_tile_coordinate := level_resource.map_grid_coordinates[index]
-		var grid_tile_mesh_index := level_resource.map_grid_mesh_indexes[index]
-		var grid_tile_mesh_orientation := level_resource.map_grid_mesh_orientations[index]
-		level_map_grid.set_cell_item(grid_tile_coordinate, grid_tile_mesh_index, grid_tile_mesh_orientation)
+	level_resource.load_level_in_grid_map(level_map_grid)
 
 # Resets all variables in Level scene
 func _reset_level() -> void:
