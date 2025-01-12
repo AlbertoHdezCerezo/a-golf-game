@@ -1,7 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://xaa88mf20pod"]
+[gd_scene load_steps=6 format=3 uid="uid://xaa88mf20pod"]
 
 [ext_resource type="Script" path="res://scenes/Level/Level.gd" id="1_8p3qr"]
 [ext_resource type="MeshLibrary" uid="uid://bskia543vtmsl" path="res://assets/mesh_libraries/PrototypeMeshLibrary.tres" id="1_av58u"]
+[ext_resource type="Script" path="res://resources/LevelResource.gd" id="3_bcp8q"]
+
+[sub_resource type="Resource" id="Resource_uo8y2"]
+script = ExtResource("3_bcp8q")
+start_point_position = Vector3(0, 0, 0)
+map_mesh_library = ExtResource("1_av58u")
+map_grid_coordinates = Array[Vector3i]([Vector3i(1, 0, 1), Vector3i(0, 0, 1), Vector3i(-1, 0, 1), Vector3i(-2, 0, 1), Vector3i(-2, 0, 0), Vector3i(-2, 0, -1), Vector3i(-2, 0, -2), Vector3i(-1, 0, -2), Vector3i(0, 0, -2), Vector3i(1, 0, -2), Vector3i(1, 0, -1), Vector3i(1, 0, 0), Vector3i(0, 0, 0), Vector3i(-1, 0, 0), Vector3i(-1, 0, -1), Vector3i(0, 0, -1), Vector3i(-3, 0, 1), Vector3i(-3, 0, 0), Vector3i(-3, 0, -1), Vector3i(-3, 0, -2), Vector3i(-2, 0, 2), Vector3i(-1, 0, 2), Vector3i(0, 0, 2), Vector3i(-2, 0, -3), Vector3i(-1, 0, -3), Vector3i(0, 0, -3), Vector3i(2, 0, 1), Vector3i(2, 0, 0), Vector3i(2, 0, -1), Vector3i(2, 0, -2), Vector3i(2, 0, 2), Vector3i(1, 0, 2), Vector3i(-3, 0, 2), Vector3i(-3, 0, -3), Vector3i(1, 0, -3), Vector3i(2, 0, -3)])
+map_grid_mesh_indexes = Array[int]([6, 0, 1, 0, 0, 0, 0, 1, 1, 6, 1, 0, 0, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 2, 1, 2])
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vkjm8"]
 height = 0.0877467
@@ -9,6 +17,7 @@ radius = 0.0847005
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_8p3qr")
+level_resource = SubResource("Resource_uo8y2")
 
 [node name="Map" type="GridMap" parent="."]
 mesh_library = ExtResource("1_av58u")
