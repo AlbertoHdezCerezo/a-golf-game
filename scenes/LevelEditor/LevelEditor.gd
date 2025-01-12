@@ -14,7 +14,7 @@ class_name LevelEditor
 		# in the editor)
 		if Engine.is_editor_hint():
 			if new_level_resource != null:
-				_load_level_from_level_resource(new_level_resource)
+				_load_level_from_level_resource()
 			else:
 				_reset_level_editor()
 
@@ -55,7 +55,7 @@ func _update_level_resource_with_editor_information() -> void:
 
 # Recreates the level described by a LevelResource instance
 # in the editor, so it can be further worked by the designer.
-func _load_level_from_level_resource(new_level_resource: LevelResource) -> void:
+func _load_level_from_level_resource() -> void:
 	_reset_level_editor()
 
 	# Load mesh library in grid map
