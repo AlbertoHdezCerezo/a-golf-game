@@ -2,18 +2,18 @@
 
 [ext_resource type="Script" path="res://scenes/LevelEditor/LevelEditor.gd" id="1_qie4p"]
 [ext_resource type="MeshLibrary" uid="uid://bskia543vtmsl" path="res://assets/mesh_libraries/PrototypeMeshLibrary.tres" id="2_l7d1d"]
-[ext_resource type="Resource" uid="uid://dwl4km5kbmbe4" path="res://assets/resources/levels/test-level.res" id="2_tkqc4"]
+[ext_resource type="Resource" uid="uid://bpb8kfrew4nd4" path="res://assets/resources/levels/test-level-2.res" id="2_x5kn3"]
 
 [node name="LevelEditor" type="Node3D"]
 script = ExtResource("1_qie4p")
-level_resource = ExtResource("2_tkqc4")
+level_resource = ExtResource("2_x5kn3")
 
 [node name="Map" type="GridMap" parent="."]
 mesh_library = ExtResource("2_l7d1d")
 cell_size = Vector3(0.6, 0.3, 0.6)
 data = {
-"cells": PackedInt32Array(0, 0, 0, 65535, 0, 0, 65535, 65535, 0, 0, 65535, 0, 1, 0, 0, 1, 65535, 0, 1, 1, 6, 0, 1, 0, 65535, 1, 0, 65534, 1, 1, 65534, 0, 1, 65534, 65535, 1, 65535, 65534, 1441793, 0, 65534, 1441793, 2, 0, 655361, 0, 2, 1048577, 65535, 2, 1048577, 65534, 2, 1048578, 1, 2, 655362, 2, 1, 655362, 2, 65535, 1441794, 1, 65534, 1441794, 65534, 65534, 2)
+"cells": PackedInt32Array(65535, 0, 655360, 65535, 65535, 655360, 0, 65535, 655365, 0, 0, 655360, 0, 1, 655360, 65535, 1, 655360, 65534, 1, 655360, 65534, 0, 655360, 65534, 65535, 655360, 65534, 65534, 655365, 65535, 65534, 655360, 0, 65534, 655360, 1, 65534, 655366, 1, 65535, 655360, 1, 0, 655360, 1, 1, 655365)
 }
 
 [node name="StartPoint" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.782853)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.832417, 0, 0.507786)
