@@ -9,11 +9,11 @@ script = ExtResource("1_18coj")
 game_level_resources = Array[Resource("res://resources/LevelResource.gd")]([ExtResource("2_o1d1k"), ExtResource("3_1n7y8")])
 
 [node name="LevelSelectorCameraWrapper" type="Node3D" parent="."]
-transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, -2.08165e-12, -0.393539, -2.08165e-12)
+transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="LevelSelectorCamera" type="Camera3D" parent="LevelSelectorCameraWrapper"]
-transform = Transform3D(1, -1.23445e-08, 5.11329e-09, 0, 1, -2.98023e-07, 0, 2.98023e-08, 1, 2.82656e-20, 8.9407e-08, 4)
+transform = Transform3D(1, -1.23445e-08, 4.72601e-08, 0, 1, -2.68221e-07, 0, 2.98023e-08, 1, -2.82656e-20, 6.09702e-13, 4)
 projection = 1
-size = 4.0
+size = 9.0
 near = 0.127
 far = 14.0
