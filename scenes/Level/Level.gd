@@ -29,12 +29,16 @@ func _ready() -> void:
 	# Whenever the scene is loaded, either in the game or in the
 	# editor, clear all level information. Let the game or the
 	# developer set the level to play, and then proceed to set it up
-	level_resource = null
 	_reset_level()
 
 	if not Engine.is_editor_hint():
 		_listen_to_finish_area_events()
 		_listen_to_timer_events()
+
+		if level_resource != null:
+			_load_level_from_level_resource()
+		else:
+			_reset_level()
 
 func _listen_to_finish_area_events() -> void:
 	finish_area.body_entered.connect(_start_timer_and_notify_body_entered_finish_area)
@@ -65,19 +69,28 @@ func _notify_body_stayed_until_timer_timeout() -> void:
 # TODO: very similar codewise to the LevelEditor logic, maybe worth exploring refactoring?
 func _load_level_from_level_resource() -> void:
 	_reset_level()
+	
+	if not _level_ready_to_be_loaded():
+		push_warning("Problem when loading Level scene: level is not yet ready to be loaded ...")
+		return
 
 	# Load mesh library in grid map
-	if level_resource.map_mesh_library != null:
-		level_map_grid.mesh_library = level_resource.map_mesh_library
+	level_map_grid.mesh_library = level_resource.map_mesh_library
 
 	# Update start point marker global position
-	if level_resource.start_point_position != null:
-		level_start_point.position = level_resource.start_point_position
+	level_start_point.position = level_resource.start_point_position
 
 	level_resource.load_level_in_grid_map(level_map_grid)
 
 # Resets all variables in Level scene
 func _reset_level() -> void:
+	if not _level_ready_to_be_loaded():
+		push_warning("Problem when resetting Level scene: level is not yet ready to be resetted ...")
+		return
+
 	level_map_grid.mesh_library = null
-	level_start_point.position = Vector3(0,0,0)
 	level_map_grid.clear()
+	level_start_point.position = Vector3(0,0,0)
+
+func _level_ready_to_be_loaded() -> bool:
+	return level_map_grid != null and level_start_point != null
