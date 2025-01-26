@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://xaa88mf20pod"]
+[gd_scene load_steps=4 format=3 uid="uid://xaa88mf20pod"]
 
 [ext_resource type="Script" path="res://scenes/Level/Level.gd" id="1_8p3qr"]
 [ext_resource type="Resource" uid="uid://dxs1dgkm3da71" path="res://assets/resources/levels/test-level-1.res" id="2_d83g5"]
-[ext_resource type="MeshLibrary" uid="uid://bskia543vtmsl" path="res://assets/mesh_libraries/PrototypeMeshLibrary.tres" id="3_ei6d2"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vkjm8"]
 height = 0.0877467
@@ -13,16 +12,11 @@ script = ExtResource("1_8p3qr")
 level_resource = ExtResource("2_d83g5")
 
 [node name="Map" type="GridMap" parent="."]
-mesh_library = ExtResource("3_ei6d2")
 cell_size = Vector3(0.6, 0.3, 0.6)
-data = {
-"cells": PackedInt32Array(65535, 0, 0, 65535, 65535, 0, 0, 65535, 655366, 0, 0, 0, 65534, 65535, 1, 65534, 0, 1, 1, 0, 655361, 1, 65535, 655361, 65535, 65534, 1441793, 0, 65534, 1441793, 0, 1, 1048577, 65535, 1, 1048577, 65534, 1, 1048578, 65534, 65534, 2, 1, 65534, 1441794, 1, 1, 655362)
-}
 
 [node name="FinishTimer" type="Timer" parent="."]
 
 [node name="StartPoint" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.412379, 0, 0.492203)
 
 [node name="FinishArea" type="Area3D" parent="."]
 

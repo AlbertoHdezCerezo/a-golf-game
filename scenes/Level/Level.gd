@@ -26,19 +26,24 @@ signal object_stayed_in_finish_area_until_timer_ran_out_signal(rigid_body_in_fin
 var body_in_finish_area: Node3D
 
 func _ready() -> void:
-	# Whenever the scene is loaded, either in the game or in the
-	# editor, clear all level information. Let the game or the
-	# developer set the level to play, and then proceed to set it up
 	_reset_level()
 
-	if not Engine.is_editor_hint():
-		_listen_to_finish_area_events()
-		_listen_to_timer_events()
+	if level_resource != null:
+		_load_level_from_level_resource()
 
-		if level_resource != null:
-			_load_level_from_level_resource()
-		else:
-			_reset_level()
+# Starts game level. Sets listeners, call backs and all the
+# in game logic for the player to start playing the level.
+# This should be invoked right before the game gives the
+# control to the player.
+func start() -> void:
+	_listen_to_finish_area_events()
+	_listen_to_timer_events()
+
+# Stops the game level. Disables all listeners, callbacks and
+# any other passive Level game logic. This should be invoked
+# after the player completes and the game takes the control
+func stop() -> void:
+	pass
 
 func _listen_to_finish_area_events() -> void:
 	finish_area.body_entered.connect(_start_timer_and_notify_body_entered_finish_area)
@@ -46,6 +51,14 @@ func _listen_to_finish_area_events() -> void:
 
 func _listen_to_timer_events() -> void:
 	finish_timer.timeout.connect(_notify_body_stayed_until_timer_timeout)
+
+# TODO: To be implemented
+func _stop_listening_to_finish_area_events() -> void:
+	pass
+
+# TODO: To be implemented
+func stop_listening_to_timer_events() -> void:
+	pass
 
 func _start_timer_and_notify_body_entered_finish_area(body: Node3D) -> void:
 	body_in_finish_area = body

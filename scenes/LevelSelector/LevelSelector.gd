@@ -2,7 +2,7 @@ extends Node3D
 
 class_name LevelSelector
 
-const LEVEL_SCENE = preload("res://scenes/Level/Level.tscn")
+const LEVEL_NAVIGATOR_SCENE = preload("res://scenes/LevelNavigator/LevelNavigator.tscn")
 
 # Collection of games that compose the game
 # TODO: to be optimized in the future when I have more levels
@@ -14,44 +14,24 @@ const LEVEL_SCENE = preload("res://scenes/Level/Level.tscn")
 			push_error("Error when loading game levels in selector: no levels were loaded")
 			return
 		
-		_instantiate_game_levels()
+		_initialize_level_navigator()
 
 @onready var game_camera := $LevelSelectorCameraWrapper/LevelSelectorCamera
 @onready var game_camera_wrapper := $LevelSelectorCameraWrapper
 
-# Node holding all level instances. We apply transformations to this
-# node in order to put each different level in front of the camera.
-var levels_carrousel : Node3D
+var levels_navigator : LevelNavigator
 
 func _ready() -> void:
 	_setup_camera()
 
+func _input(event: InputEvent) -> void:
+	var ui_direction_vector := Input.get_vector("ui_left_input", "ui_right_input", "ui_up_input", "ui_down_input")
+	levels_navigator.navigate_to_adjactent_level(ui_direction_vector)
+
 func _setup_camera():
 	game_camera.size = 9
 
-func _instantiate_game_levels() -> void:
-	var index := 1
-	var game_level_instance : Level
-	var next_game_level_position := Vector3.ZERO
-	
-	levels_carrousel = Node3D.new()
-	self.add_child(levels_carrousel)
-
-	for game_level_resource in game_level_resources:
-		# TODO: add meta information to level resources (name, number, etc)
-		#       and then use this information to name each instance with a concrete name
-		game_level_instance = LEVEL_SCENE.instantiate()
-		game_level_instance.name = "Level" + str(index)
-		game_level_instance.level_resource = game_level_resource
-		game_level_instance.position = next_game_level_position
-
-		levels_carrousel.add_child(game_level_instance)
-
-		index += 1
-		next_game_level_position = _level_position_in_selector(game_level_instance)
-
-# Determines where each one of the levels being rendered by the selector
-# need to be rendered in the global 3D space. Otherwise all levels would
-# appear overlapped.
-func _level_position_in_selector(last_game_level_instantiated) -> Vector3:
-	return last_game_level_instantiated.position + Vector3(7, 0, -7)
+func _initialize_level_navigator() -> void:
+	levels_navigator = LevelNavigator.new(game_level_resources)
+	levels_navigator.name = "LevelsNavigator"
+	self.add_child(levels_navigator)
