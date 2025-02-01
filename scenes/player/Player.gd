@@ -1,5 +1,6 @@
 extends Node3D
 
+const PLAYER_HUD_SCENE = preload("res://scenes/PlayerHUD/PlayerHUD.tscn")
 ## Multiplication factor applied to normalized force and
 ## direction vector to adjust the length of the force and
 ## direction vector in the HUD
@@ -9,70 +10,54 @@ const MAX_MODULE_FOR_SHOT_VECTOR := 0.7
 ## ball when shooting
 const MAX_MODULE_FOR_SHOT_IMPULSE := 3.5
 
-# Ball shooting parameters
-var cursor_3d_position_on_aim_start: Vector3
-var force_and_direction_vector_for_shot: Vector3
-
-# Dependent nodes
 var hud: PlayerHUD
-var camera: Camera3D
+var camera: Camera3D # TODO: maybe pass it down from enable?
+var drag_and_drop_event_handler: DragAndDropInputHandler
 
 @onready var ball: RigidBody3D = $Ball
 @onready var ball_mesh: MeshInstance3D = $Ball/Mesh
 
-var drag_and_drop_controller: DragAndDropController
-
 func _ready() -> void:
-	_setup_hud()
-	_setup_drag_and_drop_controller()
+	# TODO: remove this once we have proper game flow.
+	#    	the scenes which instantiae this node should
+	#		enable it upon request
+	enable()
 
-## Configures mouse raycaster and drag & drop controller to
-## monitor player gestures and listen to in-game events
-func _setup_drag_and_drop_controller() -> void:
-	var mouse_raycaster := MouseRaycaster.new(camera, ball, Plane(Vector3.UP, ball_mesh.mesh.radius))
-	drag_and_drop_controller = DragAndDropController.new(mouse_raycaster, 0, 2)
-
-	# drag_and_drop_controller.start_drag_signal.connect()
-	drag_and_drop_controller.drag_signal.connect(self._aim)
-	drag_and_drop_controller.drop_signal.connect(self._shoot)
-
-func _setup_hud() -> void:
-	hud = preload("res://scenes/PlayerHUD/PlayerHUD.tscn").instantiate()
+func enable() -> void:
+	# Enable HUD
+	hud = PLAYER_HUD_SCENE.instantiate()
 	hud.player_node = ball_mesh
+	hud.name = "HUD"
 	add_child(hud)
+	
+	# Enable Drag & Drop mechanism
+	var mouse_raycaster := MouseRaycaster.new(camera, ball, Plane(Vector3.UP, ball_mesh.mesh.radius))
+	drag_and_drop_event_handler = DragAndDropInputHandler.new(mouse_raycaster, 0, 2)
+	drag_and_drop_event_handler.name = "InputEventHandler"
+	drag_and_drop_event_handler.enable()
+	drag_and_drop_event_handler.drag_signal.connect(self._aim)
+	drag_and_drop_event_handler.drop_signal.connect(self._shoot)
+	add_child(drag_and_drop_event_handler)
 
-## Can the player shoot the ball? The player should only
-## be able to shoot when the ball is not moving and there
-## are no contextual menues interrupting the game flow
-func _can_shoot() -> bool:
-	# TODO: figure out why there is some velocity when
-	# 		ball is stale. Something wrong with physics?
-	return true
+func disable() -> void:
+	# Disable HUD
+	hud.queue_free()
+	hud = null
 
-## Listen to input events and triggers gameplay mechanics on
-## player actions.
-func _input(event: InputEvent) -> void:
-	if _can_shoot(): drag_and_drop_controller.handle_event(event)
+	# Disable Drag & Drop mechanism
+	drag_and_drop_event_handler.queue_free()
+	drag_and_drop_event_handler = null
 
-## Is the player currently doing a drag & drop gesture?
-## This is the equivalent of aiming.
-func _aiming() -> bool:
-	if drag_and_drop_controller == null: return false
-	return drag_and_drop_controller.dragging
-
-## Triggered when the player performs an aim gesture.
-## Reads direction and force vector from input controller
-## and applies
 func _aim(normalized_force_and_direction_vector) -> void:
-	if not _can_shoot() || normalized_force_and_direction_vector == null: return
+	if _can_shoot(normalized_force_and_direction_vector):
+		hud.draw_hud(normalized_force_and_direction_vector * MAX_MODULE_FOR_SHOT_VECTOR)
 
-	hud.draw_hud(normalized_force_and_direction_vector * MAX_MODULE_FOR_SHOT_VECTOR)
-
-## Hits the ball with the direction and force the
-## user is aiming for. Resets aiming coordinates
-## for future shots.
 func _shoot(normalized_force_and_direction_vector) -> void:
-	if not _can_shoot() || normalized_force_and_direction_vector == null: return
+	if _can_shoot(normalized_force_and_direction_vector):
+		hud.hide_hud()
+		ball.apply_impulse(normalized_force_and_direction_vector * MAX_MODULE_FOR_SHOT_IMPULSE)
 
-	hud.hide_hud()
-	ball.apply_impulse(normalized_force_and_direction_vector * MAX_MODULE_FOR_SHOT_IMPULSE)
+func _can_shoot(normalized_force_and_direction_vector) -> bool:
+	var ball_stopped := ball.linear_velocity.length() < 0.005
+	var can_calculate_shot_from_vector := (normalized_force_and_direction_vector != null)
+	return ball_stopped && can_calculate_shot_from_vector
