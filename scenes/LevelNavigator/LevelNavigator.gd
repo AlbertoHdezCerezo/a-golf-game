@@ -22,6 +22,9 @@ func _init(game_level_resources: Array[LevelResource]) -> void:
 func current_level_resource() -> LevelResource:
 	return level_resources[current_level_resource_index]
 
+func current_level() -> Level:
+	return level_slider.get_child(current_level_resource_index)
+
 func navigate_to_adjactent_level(direction_for_adjacent_level: Vector2) -> void:
 	if direction_for_adjacent_level.x < 0:
 		current_level_resource_index = clamp(current_level_resource_index - 1, 0, level_resources.size() - 1)

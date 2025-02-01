@@ -19,17 +19,37 @@ const LEVEL_NAVIGATOR_SCENE = preload("res://scenes/LevelNavigator/LevelNavigato
 @onready var game_camera := $LevelSelectorCameraWrapper/LevelSelectorCamera
 @onready var game_camera_wrapper := $LevelSelectorCameraWrapper
 
+var enabled := false
 var levels_navigator : LevelNavigator
+var last_ui_direction_vector : Vector2
 
-func _ready() -> void:
-	_setup_camera()
+signal select_level_signal(selected_level_resource)
 
+func enable() -> void:
+	enabled = true
+
+func disable() -> void:
+	enabled = false
+
+# TODO: move this to its own UI controller
 func _input(event: InputEvent) -> void:
-	var ui_direction_vector := Input.get_vector("ui_left_input", "ui_right_input", "ui_up_input", "ui_down_input")
-	levels_navigator.navigate_to_adjactent_level(ui_direction_vector)
+	if enabled:
+		if event.is_action_released("ui_confirm_input"):
+			select_level_signal.emit(levels_navigator.current_level())
 
-func _setup_camera():
-	game_camera.size = 9
+		var direction_vector = Vector2.ZERO
+		
+		if event.is_action_released("ui_left_input"):
+			direction_vector = Vector2(-1, 0)
+		if event.is_action_released("ui_right_input"):
+			direction_vector = Vector2(1, 0)
+
+		if last_ui_direction_vector != direction_vector and direction_vector.length() > 0:
+			last_ui_direction_vector = direction_vector
+			levels_navigator.navigate_to_adjactent_level(direction_vector)
+
+func _select_level(level: Level) -> void:
+	emit_signal("select_level_signal", level)
 
 func _initialize_level_navigator() -> void:
 	levels_navigator = LevelNavigator.new(game_level_resources)
