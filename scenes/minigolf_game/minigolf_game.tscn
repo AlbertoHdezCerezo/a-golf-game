@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bq7bdap87t6gp"]
 
-[ext_resource type="Script" path="res://scenes/Game/Game.gd" id="1_8qwa6"]
+[ext_resource type="Script" path="res://scenes/minigolf_game/minigolf_game.gd" id="1_d0m0e"]
 
-[node name="Game" type="Node3D"]
-script = ExtResource("1_8qwa6")
+[node name="MinigolfGame" type="Node3D"]
+script = ExtResource("1_d0m0e")
 
 [node name="LevelDirectionalLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, 0.5, -0.5, 2.4663e-16, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 1.32343, -3.29226)

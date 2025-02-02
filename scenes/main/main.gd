@@ -1,9 +1,9 @@
 extends Node3D
 
-class_name Gameplay
+class_name Main
 
 const LEVEL_SELECTOR_SCENE = preload("res://scenes/LevelSelector/LevelSelector.tscn")
-const MINIGOLF_GAME_SCENE = preload("res://scenes/Game/Game.tscn")
+const MINIGOLF_GAME_SCENE = preload("res://scenes/minigolf_game/minigolf_game.tscn")
 
 var camera_tween : Tween
 var current_level : Level
@@ -58,4 +58,3 @@ func _enable_game() -> void:
 
 func _disable_game() -> void:
 	pass
-
