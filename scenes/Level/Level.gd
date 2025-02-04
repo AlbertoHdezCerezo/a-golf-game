@@ -43,7 +43,8 @@ func start() -> void:
 # any other passive Level game logic. This should be invoked
 # after the player completes and the game takes the control
 func stop() -> void:
-	pass
+	_stop_listening_to_finish_area_events()
+	stop_listening_to_timer_events()
 
 func _listen_to_finish_area_events() -> void:
 	finish_area.body_entered.connect(_start_timer_and_notify_body_entered_finish_area)
@@ -92,6 +93,7 @@ func _load_level_from_level_resource() -> void:
 
 	# Update start point marker global position
 	level_start_point.position = level_resource.start_point_position
+	finish_area.position = level_resource.end_point_position
 
 	level_resource.load_level_in_grid_map(level_map_grid)
 

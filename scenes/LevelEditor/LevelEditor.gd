@@ -19,6 +19,7 @@ class_name LevelEditor
 				_reset_level_editor()
 
 @onready var level_start_point := $StartPoint
+@onready var level_end_point := $EndPoint
 @onready var level_map_grid := $Map
 
 # When running the scene, the level information edited in the editor
@@ -44,8 +45,11 @@ func _save_level_to_level_resource() -> void:
 # changes made in the editor scene (map, start position, etc).
 func _update_level_resource_with_editor_information() -> void:
 	level_resource.map_mesh_library = level_map_grid.mesh_library
+	level_resource.map_grid_cell_size = level_map_grid.cell_size
 	level_resource.start_point_position = level_start_point.position
+	level_resource.end_point_position = level_end_point.position
 	level_resource.map_grid_coordinates = level_map_grid.get_used_cells()
+
 	level_resource.map_grid_mesh_orientations = []
 	level_resource.map_grid_mesh_indexes = []
 
@@ -61,21 +65,19 @@ func _load_level_from_level_resource() -> void:
 	# Load mesh library in grid map
 	if level_resource.map_mesh_library != null:
 		level_map_grid.mesh_library = level_resource.map_mesh_library
-	# Update start point marker global position
+	if level_resource.map_grid_cell_size != null:
+		level_map_grid.cell_size = level_resource.map_grid_cell_size
+	# Update start and end point marker global position
 	if level_resource.start_point_position != null:
 		level_start_point.position = level_resource.start_point_position
-	
-	if _can_load_grid_map_from_level_resource():
-		level_resource.load_level_in_grid_map(level_map_grid)
+	if level_resource.end_point_position != null:
+		level_end_point.position = level_resource.end_point_position
 
-func _can_load_grid_map_from_level_resource() -> bool:
-	return level_resource.map_grid_coordinates != null \
-		and level_resource.map_grid_coordinates.size() > 0 \
-		and level_resource.map_grid_mesh_indexes != null \
-		and level_resource.map_grid_mesh_indexes.size() > 0
+	level_resource.load_level_in_grid_map(level_map_grid)
 
 # Resets all variables in Level Editor scene
 func _reset_level_editor() -> void:
 	level_map_grid.mesh_library = null
-	level_start_point.position = Vector3(0,0,0)
+	level_start_point.position = Vector3.ZERO
+	level_end_point.position = Vector3.ZERO
 	level_map_grid.clear()

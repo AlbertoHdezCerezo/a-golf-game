@@ -17,3 +17,6 @@ data = {
 
 [node name="StartPoint" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.412379, 0, 0.492203)
+
+[node name="EndPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.658101, 0.451235, -0.13385)
