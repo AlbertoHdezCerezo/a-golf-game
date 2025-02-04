@@ -25,7 +25,7 @@ data = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.412379, 0, 0.492203)
 
 [node name="FinishArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.662788, 0)
 
 [node name="CollisionShape" type="CollisionShape3D" parent="FinishArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.89754, 0.170244, 0.895597)
 shape = SubResource("CylinderShape3D_vkjm8")
