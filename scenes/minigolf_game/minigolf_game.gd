@@ -7,11 +7,7 @@ var cursor_image: Resource = load("res://assets/images/cursors/pointer.svg")
 var level: Level: 
 	set(new_level):
 		level = new_level
-
-		add_child(level)
-
 		_setup_player()
-		# level.object_stayed_in_finish_area_until_timer_ran_out_signal.connect(_check_if_level_is_completed)
 
 @onready var game_camera := $CameraWrapper/Camera
 

@@ -2,20 +2,6 @@ extends Node3D
 
 class_name LevelSelector
 
-const LEVEL_NAVIGATOR_SCENE = preload("res://scenes/LevelNavigator/LevelNavigator.tscn")
-
-# Collection of games that compose the game
-# TODO: to be optimized in the future when I have more levels
-@export var game_level_resources : Array[LevelResource]:
-	set(new_game_level_resources):
-		game_level_resources = new_game_level_resources
-
-		if game_level_resources.size() == 0:
-			push_error("Error when loading game levels in selector: no levels were loaded")
-			return
-		
-		_initialize_level_navigator()
-
 @onready var game_camera := $LevelSelectorCameraWrapper/LevelSelectorCamera
 @onready var game_camera_wrapper := $LevelSelectorCameraWrapper
 
@@ -24,12 +10,11 @@ var keyboard_event_handler : KeyboardMenuInputHandler
 
 signal select_level_signal(selected_level_resource)
 
-func _initialize_level_navigator() -> void:
-	levels_navigator = LevelNavigator.new(game_level_resources)
+func _ready() -> void:
+	levels_navigator = LevelNavigator.new()
 	levels_navigator.name = "LevelsNavigator"
 	self.add_child(levels_navigator)
 
-func _ready() -> void:
 	keyboard_event_handler = KeyboardMenuInputHandler.new()
 	keyboard_event_handler.name = "KeyboardEventHandler"
 	add_child(keyboard_event_handler)

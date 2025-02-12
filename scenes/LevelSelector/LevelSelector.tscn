@@ -1,13 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cg1fmq5p2ag4l"]
+[gd_scene load_steps=2 format=3 uid="uid://cg1fmq5p2ag4l"]
 
 [ext_resource type="Script" path="res://scenes/LevelSelector/LevelSelector.gd" id="1_18coj"]
-[ext_resource type="Resource" uid="uid://dxs1dgkm3da71" path="res://assets/resources/levels/test-level-1.res" id="2_o1d1k"]
-[ext_resource type="Script" path="res://resources/LevelResource.gd" id="2_pqv3c"]
-[ext_resource type="Resource" uid="uid://wf10n66hc2sm" path="res://assets/resources/levels/test-level-2.res" id="3_1n7y8"]
 
 [node name="LevelSelector" type="Node3D"]
 script = ExtResource("1_18coj")
-game_level_resources = Array[ExtResource("2_pqv3c")]([ExtResource("2_o1d1k"), ExtResource("3_1n7y8")])
 
 [node name="LevelSelectorCameraWrapper" type="Node3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 2.08165e-12, 2.08165e-12, 2.08165e-12)
