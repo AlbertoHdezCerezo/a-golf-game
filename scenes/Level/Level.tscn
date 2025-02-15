@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://xaa88mf20pod"]
+[gd_scene load_steps=10 format=3 uid="uid://xaa88mf20pod"]
 
 [ext_resource type="Script" path="res://scenes/Level/Level.gd" id="1_8p3qr"]
 [ext_resource type="Resource" uid="uid://wf10n66hc2sm" path="res://assets/resources/levels/test-level-2.res" id="2_lo7eq"]
@@ -7,6 +7,33 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vkjm8"]
 height = 0.0877467
 radius = 0.0847005
+
+[sub_resource type="Gradient" id="Gradient_b6wtc"]
+colors = PackedColorArray(0.0521426, 0.575015, 0.564154, 1, 0.0817682, 0.809189, 0.794289, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x0fy2"]
+gradient = SubResource("Gradient_b6wtc")
+width = 100
+height = 100
+fill_from = Vector2(0, 0.472222)
+fill_to = Vector2(0, 0.985043)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5m50x"]
+panorama = SubResource("GradientTexture2D_x0fy2")
+
+[sub_resource type="Sky" id="Sky_emft7"]
+sky_material = SubResource("PanoramaSkyMaterial_5m50x")
+
+[sub_resource type="Environment" id="Environment_vfxse"]
+background_mode = 2
+sky = SubResource("Sky_emft7")
+tonemap_mode = 2
+ssao_radius = 2.6
+fog_mode = 1
+fog_light_color = Color(0.0823529, 0.807843, 0.796078, 1)
+fog_light_energy = 0.83
+fog_height_density = 0.8754
+adjustment_saturation = 1.2
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_8p3qr")
@@ -28,3 +55,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.832417, 0, 0.507786)
 
 [node name="CollisionShape" type="CollisionShape3D" parent="FinishArea"]
 shape = SubResource("CylinderShape3D_vkjm8")
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.988415, 0.107323, -0.107324, 2.13163e-14, 0.707107, 0.707107, 0.151779, 0.698914, -0.698915, 0, 1.32343, -3.29226)
+light_color = Color(0.940533, 1, 0.943959, 1)
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 0.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vfxse")
