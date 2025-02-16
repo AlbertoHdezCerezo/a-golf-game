@@ -16,7 +16,7 @@ class_name LevelResource
 # Mesh library used to draw maps
 @export var map_mesh_library: MeshLibrary
 # Size of gridmap cells using mesh library
-@export var  map_grid_cell_size: Vector3 = Vector3.ZERO
+@export var map_grid_cell_size: Vector3 = Vector3.ZERO
 # Grid-map coordinates where tiles are placed
 @export var map_grid_coordinates: Array[Vector3i]
 # Tile index from mesh library.
