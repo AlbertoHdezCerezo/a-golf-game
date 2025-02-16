@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://xaa88mf20pod"]
 
-[ext_resource type="Script" path="res://scenes/Level/Level.gd" id="1_8p3qr"]
+[ext_resource type="Script" path="res://scenes/level/level.gd" id="1_8p3qr"]
 [ext_resource type="Resource" uid="uid://wf10n66hc2sm" path="res://assets/resources/levels/test-level-2.res" id="2_lo7eq"]
 [ext_resource type="MeshLibrary" uid="uid://bskia543vtmsl" path="res://assets/mesh_libraries/PrototypeMeshLibrary.tres" id="3_ei6d2"]
 
@@ -11,7 +11,7 @@ radius = 0.0847005
 [sub_resource type="Gradient" id="Gradient_b6wtc"]
 colors = PackedColorArray(0.0521426, 0.575015, 0.564154, 1, 0.0817682, 0.809189, 0.794289, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_x0fy2"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mkouy"]
 gradient = SubResource("Gradient_b6wtc")
 width = 100
 height = 100
@@ -19,19 +19,20 @@ fill_from = Vector2(0, 0.472222)
 fill_to = Vector2(0, 0.985043)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5m50x"]
-panorama = SubResource("GradientTexture2D_x0fy2")
+panorama = SubResource("GradientTexture2D_mkouy")
 
-[sub_resource type="Sky" id="Sky_emft7"]
+[sub_resource type="Sky" id="Sky_83r61"]
 sky_material = SubResource("PanoramaSkyMaterial_5m50x")
 
 [sub_resource type="Environment" id="Environment_vfxse"]
 background_mode = 2
-sky = SubResource("Sky_emft7")
+sky = SubResource("Sky_83r61")
 tonemap_mode = 2
 ssao_radius = 2.6
 fog_mode = 1
 fog_light_color = Color(0.0823529, 0.807843, 0.796078, 1)
 fog_light_energy = 0.83
+fog_density = 1.0
 fog_height_density = 0.8754
 adjustment_saturation = 1.2
 
