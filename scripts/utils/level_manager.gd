@@ -16,15 +16,17 @@ func load_all_levels_resources() -> void:
 	var dir := DirAccess.open(LEVEL_RESOURCES_PATH)
 	
 	for filepath in dir.get_files():
-		level_resources.append(ResourceLoader.load(LEVEL_RESOURCES_PATH + "/" + filepath))
+		var level_resource := ResourceLoader.load(LEVEL_RESOURCES_PATH + "/" + filepath)
+		if level_resource != null: level_resources.append(level_resource)
 
-	level_resources.sort_custom(
-		func(lra: LevelResource, lrb: LevelResource) -> bool:
-			if lra.world_index == lrb.world_index:
-				return lra.index <= lrb.index
-			else:
-				return lra.world_index <= lrb.world_index
-	)
+	if level_resources.size() > 1:
+		level_resources.sort_custom(
+			func(lra: LevelResource, lrb: LevelResource) -> bool:
+				if lra.world_index == lrb.world_index:
+					return lra.index <= lrb.index
+				else:
+					return lra.world_index <= lrb.world_index
+		)
 
 	current_level_resource_index = 0
 
