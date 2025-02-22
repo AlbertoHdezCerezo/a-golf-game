@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwqoyje7m1lto"]
+
+[ext_resource type="Script" path="res://scenes/sandbox/ball_control_sandbox.gd" id="1_s6eok"]
+[ext_resource type="Material" uid="uid://bvn33i67s1jki" path="res://assets/materials/mesh_libraries/grass_biome/grass.tres" id="2_kss30"]
+
+[sub_resource type="Gradient" id="Gradient_xgqtk"]
+colors = PackedColorArray(0.0398755, 0.489076, 0.479697, 1, 0.0592704, 0.631193, 0.619363, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x0fy2"]
+gradient = SubResource("Gradient_xgqtk")
+width = 100
+height = 100
+fill_from = Vector2(0, 0.472222)
+fill_to = Vector2(0, 0.985043)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ygmfl"]
+panorama = SubResource("GradientTexture2D_x0fy2")
+
+[sub_resource type="Sky" id="Sky_emft7"]
+sky_material = SubResource("PanoramaSkyMaterial_ygmfl")
+
+[sub_resource type="Environment" id="Environment_33iqy"]
+background_mode = 2
+sky = SubResource("Sky_emft7")
+tonemap_mode = 2
+ssao_radius = 2.6
+fog_mode = 1
+fog_light_color = Color(0.0823529, 0.807843, 0.796078, 1)
+fog_light_energy = 0.83
+fog_density = 1.0
+fog_height_density = 0.8754
+adjustment_saturation = 1.2
+
+[node name="BallControlSandbox" type="Node3D"]
+script = ExtResource("1_s6eok")
+
+[node name="Composition" type="Node3D" parent="."]
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="Composition"]
+transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 1.32343, -3.29226)
+light_color = Color(0.870233, 1, 0.879078, 1)
+light_energy = 0.7
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 0.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Composition"]
+environment = SubResource("Environment_33iqy")
+
+[node name="CameraWrapper" type="Node3D" parent="Composition"]
+transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, -2.08165e-12, -0.393539, -2.08165e-12)
+
+[node name="Camera" type="Camera3D" parent="Composition/CameraWrapper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 5)
+projection = 1
+size = 5.0
+near = 0.003
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0)
+use_collision = true
+size = Vector3(3.5, 3.5, 3.5)
+material = ExtResource("2_kss30")
