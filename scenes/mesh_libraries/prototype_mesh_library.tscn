@@ -8,7 +8,7 @@
 [sub_resource type="Gradient" id="Gradient_cbu6q"]
 colors = PackedColorArray(0.0398755, 0.489076, 0.479697, 1, 0.0592704, 0.631193, 0.619363, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_x0fy2"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2ina2"]
 gradient = SubResource("Gradient_cbu6q")
 width = 100
 height = 100
@@ -16,14 +16,14 @@ fill_from = Vector2(0, 0.472222)
 fill_to = Vector2(0, 0.985043)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sgyv6"]
-panorama = SubResource("GradientTexture2D_x0fy2")
+panorama = SubResource("GradientTexture2D_2ina2")
 
-[sub_resource type="Sky" id="Sky_emft7"]
+[sub_resource type="Sky" id="Sky_2ueda"]
 sky_material = SubResource("PanoramaSkyMaterial_sgyv6")
 
 [sub_resource type="Environment" id="Environment_nubfd"]
 background_mode = 2
-sky = SubResource("Sky_emft7")
+sky = SubResource("Sky_2ueda")
 tonemap_mode = 2
 ssao_radius = 2.6
 fog_mode = 1
