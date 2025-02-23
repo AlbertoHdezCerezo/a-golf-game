@@ -31,6 +31,8 @@ func _init(camera: Camera3D, body_reference: Node3D, plane: Plane = Plane(Vector
 ##     basis direction and the project_ray_origin instead of the
 ##     project_ray_normal method.
 func mouse_viewport_coordinates_in_3d_space() -> Variant:
+	if raycast_camera == null: return null
+
 	raycast_plane.d = raycast_body_reference.global_position.y
 
 	# Viewport 2D cursor coordinates
